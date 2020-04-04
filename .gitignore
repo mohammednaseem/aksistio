@@ -3,6 +3,7 @@
 #  please consider a global .gitignore https://help.github.com/articles/ignoring-files
 .vagrant*
 bin
+obj
 docker/docker
 .*.swp
 a.out
