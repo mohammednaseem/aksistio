@@ -17,9 +17,10 @@ istioctl dashboard kiali
 
 kubectl create namespace nm
 kubectl label namespace nm istio-injection=enabled
+kubectl get svc --namespace istio-system --output wide
+kubectl get pods --namespace istio-system
 
-
-az acr login -n emersso
+az acr login -n emerxo
 
 kubectl create secret docker-registry topsecret connection --docker-server emer.azurecr.io --docker-email nas.mod@soup.com --docker-username=em --docker-password oLVsZz0=OAL6lBlU9o
 
