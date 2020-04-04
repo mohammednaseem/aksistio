@@ -20,6 +20,13 @@ kubectl label namespace nm istio-injection=enabled
 kubectl get svc --namespace istio-system --output wide
 kubectl get pods --namespace istio-system
 
+istioctl dashboard grafana
+istioctl dashboard prometheus
+istioctl dashboard jaeger
+istioctl dashboard kiali
+
+istioctl dashboard envoy <pod-name>.<namespace>
+
 az acr login -n emerxo
 
 kubectl create secret docker-registry topsecret connection --docker-server emer.azurecr.io --docker-email nas.mod@soup.com --docker-username=em --docker-password oLVsZz0=OAL6lBlU9o

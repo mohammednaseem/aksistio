@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.HeaderPropagation;
 
 namespace Benefits
 {
@@ -26,6 +27,17 @@ namespace Benefits
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHttpClient("MyForwardingClient").AddHeaderPropagation();
+            services.AddHeaderPropagation(options =>
+            {
+                    {
+                        options.Headers.Add("X-TraceId");
+                        options.Headers.Add("x-aname");
+                        options.Headers.Add("x-jolly-user-group");
+                        options.Headers.Add("X-Correlation-Id");
+                        options.Headers.Add("X-request-Id");
+                    }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,13 +46,11 @@ namespace Benefits
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
+            } 
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseHeaderPropagation();
 
             app.UseEndpoints(endpoints =>
             {
