@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: benefits-api
+  namespace: nm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  benefits-api
+      version: 11.0.0
+  template:
+    metadata:
+      labels:
+        app:  benefits-api
+        version: 11.0.0
+    spec:
+      containers:
+      - name: benefits-api
+        image: emersso.azurecr.io/benefits:11.0.0      
+        ports:
+        - containerPort: 80
+        env:              
+        - name: "DeviceName" 
+          value: "aStrangeDevice"        
+      imagePullSecrets:
+      - name: topsecretregistryconnection
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: benefits-api-service
+  namespace: nm
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80      
+  selector:
+    app:  benefits-api
+    version: 11.0.0
