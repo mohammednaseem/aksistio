@@ -12,7 +12,7 @@ namespace Hospital
                                                         HealthCheckContext context,
                                                         CancellationToken cancellationToken = default(CancellationToken))
         {
-            var healthCheckResultHealthy = true;
+            var healthCheckResultHealthy = false;
 
             if (healthCheckResultHealthy)
             {
