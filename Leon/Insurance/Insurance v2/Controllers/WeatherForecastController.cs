@@ -5,17 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Benefits.Controllers
+namespace Insurance_v2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
-    {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+    {        
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -28,10 +23,8 @@ namespace Benefits.Controllers
         {
             var rng = new Random();
             return Enumerable.Range(1, 1).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = "Test"
+            {                
+                Summary = "Version 2"
             })
             .ToArray();
         }

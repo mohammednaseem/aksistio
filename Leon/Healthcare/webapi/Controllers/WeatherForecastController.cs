@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Benefits.Controllers
+namespace Healthcare.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -27,11 +27,11 @@ namespace Benefits.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 1).Select(index => new WeatherForecast
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = "Test"
+                Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
         }

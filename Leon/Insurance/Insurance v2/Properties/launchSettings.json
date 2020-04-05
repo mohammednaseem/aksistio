@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:7840",
-      "sslPort": 44374
+      "applicationUrl": "http://localhost:14910",
+      "sslPort": 44337
     }
   },
   "profiles": {
@@ -17,11 +17,11 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Hospital": {
+    "Insurance_v2": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:5400",
+      "applicationUrl": "http://localhost:5500",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
