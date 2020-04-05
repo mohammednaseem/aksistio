@@ -8,16 +8,14 @@ spec:
   selector:
     matchLabels:
       app:  hospital-api
-      version: 11.0.1
   template:
     metadata:
       labels:
         app:  hospital-api
-        version: 11.0.1
     spec:
       containers:
       - name: hospital-api
-        image: emersso.azurecr.io/hospital:11.0.1
+        image: emersso.azurecr.io/hospital:11.0.5
         resources:
           requests:
             memory: "32Mi"
@@ -55,4 +53,3 @@ spec:
     port: 80      
   selector:
     app:  hospital-api
-    version: 11.0.1

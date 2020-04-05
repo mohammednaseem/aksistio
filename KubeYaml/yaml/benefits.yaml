@@ -8,16 +8,14 @@ spec:
   selector:
     matchLabels:
       app:  benefits-api
-      version: 11.0.0
   template:
     metadata:
       labels:
         app:  benefits-api
-        version: 11.0.0
     spec:
       containers:
       - name: benefits-api
-        image: emersso.azurecr.io/benefits:11.0.3
+        image: emersso.azurecr.io/benefits:11.0.5
         resources:
           requests:
             memory: "32Mi"
@@ -27,6 +25,15 @@ spec:
             cpu: "100m"
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+            httpHeaders:
+            - name: X-Custom-Header
+              value: Awesome
+          initialDelaySeconds: 90
+          periodSeconds: 10
         env:              
         - name: "InsUrl"   
           value: "http://insurance-api-service"        
@@ -46,4 +53,3 @@ spec:
     port: 80      
   selector:
     app:  benefits-api
-    version: 11.0.0

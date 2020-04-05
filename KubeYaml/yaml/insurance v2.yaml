@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: insurance-api
-        image: emersso.azurecr.io/insurancev2:11.0.1
+        image: emersso.azurecr.io/insurancev2:11.0.5
         resources:
           requests:
             memory: "32Mi"
@@ -27,6 +27,15 @@ spec:
             cpu: "100m"
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+            httpHeaders:
+            - name: X-Custom-Header
+              value: Awesome
+          initialDelaySeconds: 90
+          periodSeconds: 10
         env:              
         - name: "DeviceName" 
           value: "aStrangeDevice"        
