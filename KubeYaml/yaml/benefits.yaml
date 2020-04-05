@@ -17,12 +17,12 @@ spec:
     spec:
       containers:
       - name: benefits-api
-        image: emersso.azurecr.io/benefits:11.0.0      
+        image: emersso.azurecr.io/benefits:11.0.3
         ports:
         - containerPort: 80
         env:              
-        - name: "DeviceName" 
-          value: "aStrangeDevice"        
+        - name: "InsUrl"   
+          value: "http://insurance-api-service"        
       imagePullSecrets:
       - name: topsecretregistryconnection
 ---

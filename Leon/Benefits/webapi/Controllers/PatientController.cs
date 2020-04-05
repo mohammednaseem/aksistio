@@ -44,16 +44,27 @@ namespace Benefits.Controllers
         private async Task<string> ProcessPatientBenefits()
         {
             string toReturn = string.Empty;
-            var url = _configuration["InsUrl"] + "/WeatherForecast";
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            try {
+                var url = _configuration["InsUrl"] + "/WeatherForecast";
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
 
-            var client = _clientFactory.CreateClient("BenefitsClient");
+                var client = _clientFactory.CreateClient("InsuranceClient");
 
-            var response = await client.SendAsync(request);
+                var response = await client.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
+                {
+                    toReturn = await response.Content.ReadAsStringAsync();    
+                }
+                else
+                {
+                    toReturn = response.StatusCode + "" + response.ReasonPhrase;
+                }
+            }
+            catch(Exception ex)
             {
-                toReturn = await response.Content.ReadAsStringAsync();    
+                Console.WriteLine(ex);
+                return ex.ToString();
             }
             return toReturn;
         }

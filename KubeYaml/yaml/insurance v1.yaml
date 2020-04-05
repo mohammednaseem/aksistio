@@ -1,42 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: healthcare-api
+  name: insurance-api
   namespace: nm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  healthcare-api
-      version: 11.0.0
+      app:  insurance-api
+      version: old
   template:
     metadata:
       labels:
-        app:  healthcare-api
-        version: 11.0.0
+        app:  insurance-api
+        version: old
     spec:
       containers:
-      - name: healthcare-api
-        image: emersso.azurecr.io/healthcare:11.0.1
+      - name: insurance-api
+        image: emersso.azurecr.io/insurancev1:11.0.1     
         ports:
         - containerPort: 80
         env:              
-        - name: "BenefitsUrl" 
-          value: "http://benefits-api-service"        
+        - name: "DeviceName" 
+          value: "aStrangeDevice"        
       imagePullSecrets:
       - name: topsecretregistryconnection
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: healthcare-api-service
+  name: insurance-api-service
   namespace: nm
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: http
     protocol: TCP
-    port: 80
+    port: 80      
   selector:
-    app:  healthcare-api
-    version: 11.0.0
+    app:  insurance-api    
