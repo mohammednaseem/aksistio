@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HeaderPropagation;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Benefits
 {
@@ -27,6 +29,8 @@ namespace Benefits
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHealthChecks()
+                    .AddCheck<ExHealthCheck>("ex_health_check");
             services.AddHttpClient("InsuranceClient").AddHeaderPropagation();
             services.AddHeaderPropagation(options =>
             {
@@ -55,6 +59,7 @@ namespace Benefits
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/Health");
             });
         }
     }

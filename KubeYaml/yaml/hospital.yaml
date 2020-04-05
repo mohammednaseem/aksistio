@@ -17,9 +17,18 @@ spec:
     spec:
       containers:
       - name: hospital-api
-        image: emersso.azurecr.io/hospital:11.0.0      
+        image: emersso.azurecr.io/hospital:11.0.1
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+            httpHeaders:
+            - name: X-Custom-Header
+              value: Awesome
+          initialDelaySeconds: 90
+          periodSeconds: 10
         env:              
         - name: "DeviceName" 
           value: "aStrangeDevice"        

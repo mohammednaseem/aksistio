@@ -49,7 +49,6 @@ namespace Benefits.Controllers
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
 
                 var client = _clientFactory.CreateClient("InsuranceClient");
-
                 var response = await client.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)

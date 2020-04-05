@@ -20,6 +20,7 @@ kubectl label namespace nm istio-injection=enabled
 kubectl get svc --namespace istio-system --output wide
 kubectl get pods --namespace istio-system
 
+
 istioctl dashboard grafana
 istioctl dashboard prometheus
 istioctl dashboard jaeger
