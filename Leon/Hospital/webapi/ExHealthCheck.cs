@@ -8,8 +8,7 @@ namespace Hospital
 {
     public class ExHealthCheck : IHealthCheck
     {
-        public Task<HealthCheckResult> CheckHealthAsync(
-                                                        HealthCheckContext context,
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
                                                         CancellationToken cancellationToken = default(CancellationToken))
         {
             var healthCheckResultHealthy = true;

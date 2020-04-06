@@ -13,7 +13,7 @@ kubectl create namespace istio-system --save-config
 
 kubectl apply -f C:\Kube\cloudnative\aksistio\KubeYaml\kiali.yaml
 kubectl apply -f C:\Kube\cloudnative\aksistio\KubeYaml\grafana.yaml
-istioctl dashboard kiali
+
 
 kubectl create namespace nm
 kubectl label namespace nm istio-injection=enabled

@@ -37,7 +37,7 @@ namespace Benefits
                     {
                         options.Headers.Add("X-TraceId");
                         options.Headers.Add("x-aname");
-                        options.Headers.Add("x-jolly-user-group");
+                        options.Headers.Add("x-user-group");
                         options.Headers.Add("X-Correlation-Id");
                         options.Headers.Add("X-request-Id");
                     }
