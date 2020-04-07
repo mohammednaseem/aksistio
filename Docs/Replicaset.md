@@ -3,24 +3,22 @@
 ## docker login (this is step 1)
 docker login tremersso.azurecr.io -u tremersso -p yLxxxzgW5wFxxxBlU9y
 
-### ckad -> pods
-#### create pod
-create pod with benefits 11.0.5 in ckad namespace
-kubectl run benefits --image=tremersso.azurecr.io/benefits:11.0.5 -n ckad --generator=run-pod/v1
+### ckad -> replicasets
+#### How many ReplicaSets exist on the nm namespace?
+kubectl get replicaset -n nm
+Run above command and count the number of replicasets.
 
-#### Find image of a pod
-kubectl describe pod benefits -n ckad
+#### How many PODs are DESIRED in the new-replica-set?
+kubectl get replicaset -n nm
+now look at the count under the 'Desired' column
 
-#### Find the pods & corresponding host nodes
-kubectl get pods -n ckad -o wide 
-OR finding for individual pod (benefits) only 
-kubectl describe pod benefits -n ckad
+#### What is the image used to create the pods in the benefits-api-8b4bcc568?
+kubectl describe replicaset benefits-api-8b4bcc568 -n nm
+Under "Pod Template" -> Containers -> Image
 
-#### How many containers (and their corresponding images) are part of the pod 'benefits-xxxx-xxxx' in -n nm namespace?
-kubectl describe pod benefits -n nm 
-Under containers section you will see pods a) benefits-api-service & 2) istio-proxy 
-Pod Images for benefits-xxxx-xxxxx (tremersso.azurecr.io/benefits:11.0.5)
-Pod Images for istio-proxy (docker.io/istio/proxyv2:1.4.0)
+#### How many PODs are DESIRED/CURRENT/READY in the replicaset (benefits-api-8b4bcc568) in -n nm namespace?
+kubectl get rs -n nm 
+Now look under Ready column
 
 #### What is the state of the container 'benefits-xxxx-xxxxx' in the pod 'benefits'?
 kubectl describe pod benefits -n ckad (and look under status column)
