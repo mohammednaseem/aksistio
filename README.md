@@ -35,6 +35,10 @@ kubectl get pod benefits -n ckad -o yaml > .\KubeYaml\testingplace\ben.yaml
 then we will kubectl apply command
 kubectl apply -f .\KubeYaml\testingplace\ben.yaml
 
+Another option is to run the command "kubectl edit pod benefits -n ckad" and edit the file.. I tested it on windows..
+
+
+
 
 
 
