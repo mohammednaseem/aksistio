@@ -20,29 +20,13 @@ Under "Pod Template" -> Containers -> Image
 kubectl get rs -n nm 
 Now look under Ready column
 
-#### What is the state of the container 'benefits-xxxx-xxxxx' in the pod 'benefits'?
-kubectl describe pod benefits -n ckad (and look under status column)
+#### Fix the replicaset defintion in the file /PractiseYamls/rs-1.yaml
 
-#### What does the READY column in the output of the 'kubectl get pods' command indicate?
-Running Containers in Pod/Total Containers in Pod
+#### Scale the replicaset to 3 pods
+kubectl scale --replicas=3 rs/benefits-api-8b4bcc568  -n nm
 
-#### Change the image of a running pod
-(kubectl set image works only on deployment* I think)
-so we will first create a yaml file using below command
-kubectl get pod benefits -n ckad -o yaml > .\KubeYaml\testingplace\ben.yaml
-then we will kubectl apply command
-kubectl apply -f .\KubeYaml\testingplace\ben.yaml
-
-Another option is to run the command "kubectl edit pod benefits -n ckad" and edit the file.. I tested it on windows..
-
-
-
-
-
-
-
-
-
-
-
+kubectl scale --replicas=3 rs/foo                                 # Scale a replicaset named 'foo' to 3
+kubectl scale --replicas=3 -f foo.yaml                            # Scale a resource specified in "foo.yaml" to 3
+kubectl scale --current-replicas=2 --replicas=3 deployment/mysql  # If the deployment named mysql's current size is 2, scale mysql to 3
+kubectl scale --replicas=5 rc/foo rc/bar rc/baz                   # Scale multiple replication controllers
 
