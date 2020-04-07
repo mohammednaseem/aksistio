@@ -42,7 +42,17 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
 kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 
 
-
 #### Create a service redis-service to expose the redis application within the cluster on port 6379.
 kubectl run redis --image=redis --generator=run-pod/v1
 kubectl expose pod redis --port=6379 --name redis-service
+
+#### Create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas
+kubectl create deployment webapp --image=kodekloud/webapp-color 
+kubectl scale deployment/webapp --replicas=3
+
+#### Delete Resources
+kubectl delete -f ./pod.json         # Delete a pod using the type and name specified in pod.json
+kubectl delete pod,service baz foo           # Delete pods and services with same names "baz" and "foo"
+kubectl delete pods,services -l name=myLabel     # Delete pods and services with label name=myLabel
+kubectl -n my-ns delete pod,svc --all          # Delete all pods and services in namespace my-ns
+
