@@ -37,12 +37,21 @@ spec:
   - name: "Hospital"    
     match:
     - uri:
-        regex: "/."  #match any (first and only 1) chracter
+        prefix: "/hospital"   
     rewrite:
       uri: "/Weatherforecast"
     route:
     - destination:
-        host: healthcare-api-service.nm.svc.cluster.local    
+        host: hospital-api-service.nm.svc.cluster.local    
+    - name: "RegexTest"    
+      match:
+      - uri:
+          regex: "/."  # regex not working.. TODO:  fix later.
+    rewrite:
+      uri: "/Weatherforecast"
+    route:
+    - destination:
+        host: hospital-api-service.nm.svc.cluster.local    
   - name: "Catch-all-route"  
     rewrite:
       uri: "/Patient"
