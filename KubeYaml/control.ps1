@@ -1,3 +1,7 @@
+az ad sp create-for-rbac --name nsm_kobe_klster_master_api_sp
+az account set --subscription "My Demos"
+
+
 # Specify the Istio version that will be leveraged throughout these instructions
 $ISTIO_VERSION="1.4.0"
 
