@@ -15,7 +15,18 @@ spec:
     spec:
       containers:
       - name: busybox-container
-        image: busybox888
+        image: busybox
+        env:
+        - name: SPECIAL_LEVEL_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: special.how
+        - name: SPECIAL_TYPE_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: special.type
         command:
         - sh
         - "-c"

@@ -22,6 +22,9 @@ kubectl apply -f C:\Kube\cloudnative\aksistio\KubeYaml\grafana.yaml
 kubectl create namespace nm
 kubectl label namespace nm istio-injection=enabled
 
+kubectl create namespace ckad
+kubectl label namespace ckad istio-injection=enabled
+
 kubectl get svc --namespace istio-system --output wide
 kubectl get pods --namespace istio-system
 

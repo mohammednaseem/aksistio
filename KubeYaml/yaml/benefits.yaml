@@ -16,6 +16,9 @@ spec:
       containers:
       - name: benefits-api
         image: emersso.azurecr.io/benefits:11.0.5
+        securityContext:
+          runAsUser: 1000
+          capabilities: ["Mac_Admin"]
         resources:
           requests:
             memory: "32Mi"
