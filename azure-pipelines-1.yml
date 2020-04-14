@@ -11,9 +11,11 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '5be28d4b-0268-41fb-9ba2-1cd6ca186701'
-  imageRepository: 'mohammednaseemaksistio'
+  imageRepository1: 'benefits'
+  imageRepository2: 'healthcare'
   containerRegistry: 'dockerstore.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Leon/Benefits/Dockerfile'
+  dockerfilePath1: '$(Build.SourcesDirectory)/Leon/Benefits/Dockerfile'
+  dockerfilePath2: '$(Build.SourcesDirectory)/Leon/Healthcare/Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Agent VM image name
@@ -23,8 +25,8 @@ stages:
 - stage: Build
   displayName: Build and push stage
   jobs:  
-  - job: Build
-    displayName: Build
+  - job: Build1
+    displayName: Build1
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -32,8 +34,22 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
+        repository: $(imageRepository1)
+        dockerfile: $(dockerfilePath1)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+  - job: Build2
+    displayName: Build2
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository2)
+        dockerfile: $(dockerfilePath2)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
