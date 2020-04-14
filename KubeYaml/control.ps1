@@ -38,7 +38,7 @@ istioctl dashboard envoy <pod-name>.<namespace>
 
 az acr login -n emerxo
 
-kubectl create secret docker-registry topsecret connection --docker-server emer.azurecr.io --docker-email nas.mod@soup.com --docker-username=em --docker-password oLVsZfOAL6lBlU9o
+kubectl create secret docker-registry topsecretregistryconnection connection --docker-server emer.azurecr.io --docker-email nas.mod@soup.com --docker-username=em --docker-password oLVsZfOAL6lBlU9o
 
 az aks get-credentials --name malxxdtax -g OndfimRG --admin
 
