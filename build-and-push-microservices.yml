@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'b4e51c5f-0d4d-4dda-a3d9-7b6b30b8b645'
+  dockerRegistryServiceConnection: '3fb5e577-f47e-4ad8-ae58-ab6cebb62002'
   imageRepositorybenefits: 'benefits'
   imageRepositoryhealthcare: 'healthcare'
   containerRegistry: 'dockerstore.azurecr.io'
