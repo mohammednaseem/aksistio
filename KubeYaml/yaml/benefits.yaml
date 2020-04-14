@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: benefits-api
-        image: dockerstore.azurecr.io/benefits:72   
+        image: dockerstore.azurecr.io/benefits:$(tag)   
         resources:
           requests:
             memory: "32Mi"
