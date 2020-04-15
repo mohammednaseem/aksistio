@@ -29,5 +29,5 @@ stages:
         definition: '13'
         specificBuildWithTriggering: true
         buildVersionToDownload: 'latest'
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)/download'
     
