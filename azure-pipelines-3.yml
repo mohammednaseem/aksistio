@@ -30,4 +30,15 @@ stages:
         specificBuildWithTriggering: true
         buildVersionToDownload: 'latest'
         targetPath: '$(Pipeline.Workspace)/download'
+
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'
+           
+          cat '$(Pipeline.Workspace)/download'
+ 
     
