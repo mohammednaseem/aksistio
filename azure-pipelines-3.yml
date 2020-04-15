@@ -39,6 +39,6 @@ stages:
           
           echo 'Hello world'
            
-          cat '$(Pipeline.Workspace)/download'
+          ls '$(Pipeline.Workspace)/download'
  
     
