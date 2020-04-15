@@ -12,11 +12,11 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Basher
+- stage: BasherPublish
   displayName: Bash Test
   jobs:  
-  - job: BashJob
-    displayName: Bash Job
+  - job: BashPubJob
+    displayName: Bash Pub Job
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -43,7 +43,7 @@ stages:
           echo "$value1"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/benefits'
+        targetPath: '$(Pipeline.Workspace)'
         artifact: 'benefits_cicd_artifact'
         publishLocation: 'pipeline'
     
