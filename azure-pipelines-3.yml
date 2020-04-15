@@ -39,7 +39,7 @@ stages:
           
           echo 'Hello world'
            
-          find "$PWD" -type f '$(Pipeline.Workspace)/download'
+          find  '$(Pipeline.Workspace)/download'
 
           
 
