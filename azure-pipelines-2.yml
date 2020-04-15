@@ -41,10 +41,10 @@ stages:
           value=${value//##BUILD_ID##/$(Build.BuildId)}
           
 
-          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/basher1.yaml'
+          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'
 
           echo 'Hello world 1'  
-          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/basher1.yaml'`
+          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
            
