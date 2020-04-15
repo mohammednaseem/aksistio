@@ -29,23 +29,26 @@ stages:
           # Write your commands here
           
           echo 'Hello world'
-
-            
+           
           cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'
 
           echo 'Hello world 0'  
           value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'`
 
-
           echo 'Hello world 0.25'  
           value=${value//##BUILD_ID##/$(Build.BuildId)}
           
-
           echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'
-
           echo 'Hello world 1'  
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
-           
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/benefits'
+        artifact: 'benefits_cicd_artifact'
+        publishLocation: 'pipeline'
+    
+    
+          
           
