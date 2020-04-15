@@ -29,5 +29,23 @@ stages:
           # Write your commands here
           
           echo 'Hello world'
-          echo $(Build.BuildId)
+
+            
+          cat '$(System.DefaultWorkingDirectory)/_mohammednaseem_aksistio/KubeYaml/yaml/benefits.yaml'
+
+          echo 'Hello world 0'  
+          value=`cat '$(System.DefaultWorkingDirectory)/_mohammednaseem_aksistio/KubeYaml/yaml/benefits.yaml'`
+
+
+          echo 'Hello world 0.25'  
+          value=${value//##BUILD_ID##/$(Build.BuildId)}
+          
+
+          echo "$value" > '$(System.DefaultWorkingDirectory)/_mohammednaseem_aksistio/KubeYaml/yaml/basher1.yaml'
+
+          echo 'Hello world 1'  
+          value1=`cat '$(System.DefaultWorkingDirectory)/_mohammednaseem_aksistio/KubeYaml/yaml/basher1.yaml'`
+          echo 'Hello world 2'  
+          echo "$value1"
+           
           
