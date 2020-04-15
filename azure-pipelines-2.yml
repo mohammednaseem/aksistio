@@ -1,0 +1,52 @@
+# Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: BasherPublish
+  displayName: Bash Test
+  jobs:  
+  - job: BashPubJob
+    displayName: Bash Pub Job
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'
+           
+          cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'
+
+          echo 'Hello world 0'  
+          value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'`
+
+          echo 'Hello world 0.25'  
+          value=${value//##BUILD_ID##/$(Build.BuildId)}
+          
+          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'
+          echo 'Hello world 1'  
+          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'`
+          echo 'Hello world 2'  
+          echo "$value1"
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'benefits_cicd_artifact'
+        publishLocation: 'pipeline'
+    
+    
+          
+          
