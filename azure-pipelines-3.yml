@@ -40,5 +40,8 @@ stages:
           echo 'Hello world'
            
           ls '$(Pipeline.Workspace)/download'
+
+          ls '$(Pipeline.Workspace)/download/benefits_cicd_artifact'
+
  
     
