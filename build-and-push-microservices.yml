@@ -126,6 +126,9 @@ stages:
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
+
+          mkdir '$(Pipeline.Workspace)/benefits'  
+          echo 'after creation of benefits'  
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)/benefits'        
@@ -157,6 +160,9 @@ stages:
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/healthcare_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
+
+          mkdir '$(Pipeline.Workspace)/healthcare'  
+          echo 'after creation of healthcare'  
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)/healthcare'        
@@ -195,6 +201,40 @@ stages:
       inputs:
         targetPath: '$(Pipeline.Workspace)/insurancev1'        
         artifactName: 'insurancev1artifact'
+        publishLocation: 'pipeline'
+
+  - job: PreReleasePrepForInsurancev2Microservice
+    displayName: Pre Release Preparation For Insurancev2 Microservice
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'           
+          cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev2.yaml'
+
+          echo 'Hello world 0'  
+          value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev2.yaml'`
+
+          echo 'Hello world 0.25'  
+          value=${value//##BUILD_ID##/$(Build.BuildId)}
+          
+          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev2.yaml_build.yaml'
+          echo 'Hello world 1'  
+          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev2_build.yaml'`
+          echo 'Hello world 2'  
+          echo "$value1"
+
+          mkdir '$(Pipeline.Workspace)/insurancev2'  
+          echo 'after creation of insurancev2'  
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/insurancev2'        
+        artifactName: 'insurancev2artifact'
         publishLocation: 'pipeline'
 
   - job: PreReleasePrepForHospitalMicroservice
