@@ -128,8 +128,8 @@ stages:
           echo "$value1"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'build_BPM_artifact'
+        targetPath: '$(Pipeline.Workspace)/benefits'        
+        artifactName: 'benefitsartifact'
         publishLocation: 'pipeline'
   
   - job: PreReleasePrepForHealthcareMicroservice
@@ -159,8 +159,8 @@ stages:
           echo "$value1"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'build_BPM_artifact'
+        targetPath: '$(Pipeline.Workspace)/healthcare'        
+        artifactName: 'healthcareartifact'
         publishLocation: 'pipeline'
 
   - job: PreReleasePrepForInsurancev1Microservice
@@ -190,8 +190,8 @@ stages:
           echo "$value1"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'build_BPM_artifact'
+        targetPath: '$(Pipeline.Workspace)/insurancev1'        
+        artifactName: 'insurancev1artifact'
         publishLocation: 'pipeline'
 
   - job: PreReleasePrepForHospitalMicroservice
@@ -221,6 +221,6 @@ stages:
           echo "$value1"
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'build_BPM_artifact'
+        targetPath: '$(Pipeline.Workspace)/hospital'        
+        artifactName: 'hospitalartifact'
         publishLocation: 'pipeline'
