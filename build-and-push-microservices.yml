@@ -30,6 +30,24 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(solution)'
+
+    - task: VSBuild@1
+      inputs:
+        solution: '$(solution)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+
+    - task: VSTest@2
+      inputs:
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
@@ -43,45 +61,43 @@ stages:
     displayName: Build and push Healthcare Microservice
     pool:
       vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
         command: buildAndPush
         repository: $(imageRepositoryhealthcare)
         dockerfile: $(dockerhealthcarefilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-  - job: PreReleasePrep
-    displayName: Pre Release Preparation
-    pool:
-      vmImage: $(vmImageName)
-    steps:
+      - job: PreReleasePrep
+        displayName: Pre Release Preparation
+        pool:
+          vmImage: $(vmImageName)
+        steps:
 
-    - task: Bash@3
-      inputs:
+      - task: Bash@3
+        inputs:
         targetType: 'inline'
         script: |
           # Write your commands here
-          
-          echo 'Hello world'
-           
+              
+          echo 'Hello world'              
           cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'
-
           echo 'Hello world 0'  
           value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits.yaml'`
 
           echo 'Hello world 0.25'  
           value=${value//##BUILD_ID##/$(Build.BuildId)}
-          
+              
           echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'
           echo 'Hello world 1'  
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/benefits_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
-    - task: PublishPipelineArtifact@1
-      inputs:
+      - task: PublishPipelineArtifact@1
+        inputs:
         targetPath: '$(Pipeline.Workspace)'
         artifact: 'build_BPM_artifact'
         publishLocation: 'pipeline'
