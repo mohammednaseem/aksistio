@@ -163,8 +163,8 @@ stages:
         artifact: 'build_BPM_artifact'
         publishLocation: 'pipeline'
 
-  - job: PreReleasePrepForHealthcareMicroservice
-    displayName: Pre Release Preparation For Healthcare Microservice
+  - job: PreReleasePrepForInsurancev1Microservice
+    displayName: Pre Release Preparation For Insurancev1 Microservice
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -175,17 +175,17 @@ stages:
           # Write your commands here
           
           echo 'Hello world'           
-          cat '$(Build.SourcesDirectory)/KubeYaml/yaml/healthcare.yaml'
+          cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev1.yaml'
 
           echo 'Hello world 0'  
-          value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/healthcare.yaml'`
+          value=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev1.yaml'`
 
           echo 'Hello world 0.25'  
           value=${value//##BUILD_ID##/$(Build.BuildId)}
           
-          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/healthcare_build.yaml'
+          echo "$value" > '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev1.yaml_build.yaml'
           echo 'Hello world 1'  
-          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/healthcare_build.yaml'`
+          value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev1_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
     - task: PublishPipelineArtifact@1
