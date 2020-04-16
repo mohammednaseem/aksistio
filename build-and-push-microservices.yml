@@ -68,7 +68,7 @@ stages:
       displayName: Build and push a new Hospital image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepositoryhospital;)
+        repository: $(imageRepositoryhospital)
         dockerfile: $(dockerhospitalfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
