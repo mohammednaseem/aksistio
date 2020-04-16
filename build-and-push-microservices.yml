@@ -188,6 +188,9 @@ stages:
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/insurancev1_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
+
+          mkdir '$(Pipeline.Workspace)/insurancev1'  
+          echo 'after creation of insurancev1'  
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)/insurancev1'        
@@ -219,6 +222,9 @@ stages:
           value1=`cat '$(Build.SourcesDirectory)/KubeYaml/yaml/hospital_build.yaml'`
           echo 'Hello world 2'  
           echo "$value1"
+
+          mkdir '$(Pipeline.Workspace)/hospital'  
+          echo 'after creation of hospital'  
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)/hospital'        
